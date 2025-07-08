@@ -22,15 +22,19 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Restore dependencies
-        run: dotnet restore MyLibrary/MyLibrary.csproj
+        run: dotnet restore
+        working-directory: MyLibrary
 
       - name: Build
-        run: dotnet build MyLibrary/MyLibrary.csproj -c Release
+        run: dotnet build -c Release
+        working-directory: MyLibrary
 
       - name: Pack NuGet package
-        run: dotnet pack MyLibrary/MyLibrary.csproj -c Release --no-build -o out
+        run: dotnet pack -c Release --no-build -o out
+        working-directory: MyLibrary
 
       - name: Publish to GitHub Packages
         run: dotnet nuget push out/*.nupkg --source "github" --skip-duplicate
+        working-directory: MyLibrary
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
