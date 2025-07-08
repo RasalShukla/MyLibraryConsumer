@@ -1,6 +1,6 @@
 is_global = true
 build_property.RootNamespace = MyLibrary
-build_property.ProjectDir = C:\Users\Rasal\source\repos\MyConsumer\MyLibrary\
+build_property.ProjectDir = D:\MyConsumer\MyLibrary\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTUseWindowsUIXamlProjections = false
