@@ -22,7 +22,7 @@ jobs:
 
       - name: Pack and Push
         run: |
-          dotnet pack MyConsumer/MyLibrary/MyLibrary.csproj -c Release -o out
+          dotnet pack MyLibrary/MyLibrary.csproj -c Release -o out
           dotnet nuget push out/*.nupkg --source github --skip-duplicate
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
