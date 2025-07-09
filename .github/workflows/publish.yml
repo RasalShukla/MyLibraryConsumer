@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup .NET SDK
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
@@ -36,6 +36,7 @@ jobs:
 
       - name: Push NuGet package to GitHub Packages
         run: |
+          ls out
           dotnet nuget push out/*.nupkg \
             --source "https://nuget.pkg.github.com/rasalshukla/index.json" \
             --api-key "${{ secrets.GITHUB_TOKEN }}" \
