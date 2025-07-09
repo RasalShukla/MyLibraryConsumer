@@ -30,7 +30,7 @@ jobs:
         run: dotnet build -c Release
         working-directory: MyLibrary
 
-      - name: Pack NuGet package
+      - name: Pack NuGet package Rasal
         run: dotnet pack -c Release --no-build -o out
         working-directory: MyLibrary
 
