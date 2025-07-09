@@ -27,7 +27,7 @@ jobs:
         working-directory: MyLibrary
 
       - name: Pack NuGet package
-        run: dotnet pack -c Release --no-build -o out
+        run: dotnet pack -c Release -o out
         working-directory: MyLibrary
 
       - name: Push NuGet package to GitHub Packages
