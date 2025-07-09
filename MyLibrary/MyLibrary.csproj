@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-     <PackageId>MyLibraryRasal</PackageId>
+     <PackageId>MyLibrary</PackageId>
     <Version>1.0.0</Version>
     <Authors>YourName</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
