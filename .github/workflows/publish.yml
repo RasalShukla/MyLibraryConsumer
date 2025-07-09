@@ -10,30 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore
-        working-directory: MyLibrary
+      - name: Build & Pack MyLibrary
+        run: |
+          dotnet restore MyLibrary
+          dotnet build MyLibrary -c Release
+          dotnet pack MyLibrary -c Release -o out
 
-      - name: Build
-        run: dotnet build -c Release
-        working-directory: MyLibrary
-
-      - name: Pack NuGet package
-        run: dotnet pack -c Release --no-build -o out
-        working-directory: MyLibrary
-
-      - name: Push to GitHub Packages
+      - name: Publish NuGet Package to GitHub
         run: |
           dotnet nuget push out/*.nupkg \
             --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
             --api-key ${{ secrets.GITHUB_TOKEN }} \
             --skip-duplicate
-        working-directory: MyLibrary
