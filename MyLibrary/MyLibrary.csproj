@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
+    <TargetFramework>net8.0</TargetFramework>
+    <Version>2.0.1</Version>
     <Authors>rasalshukla</Authors>
     <PackageId>MyLibrary</PackageId>
-    <Description>A test library Rasal</Description>
+    <Description>A test library</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/rasalshukla/MyLibraryConsumer</RepositoryUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
