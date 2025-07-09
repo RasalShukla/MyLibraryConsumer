@@ -14,26 +14,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore
+      - name: Restore dependencies
         run: dotnet restore
         working-directory: MyLibrary
 
-      - name: Build
+      - name: Build project
         run: dotnet build -c Release
         working-directory: MyLibrary
 
-      - name: Pack
-        run: dotnet pack -c Release -o out
+      - name: Pack NuGet package
+        run: dotnet pack -c Release --no-build -o out
         working-directory: MyLibrary
 
-      - name: Push to GitHub Packages
+      - name: Push NuGet package to GitHub Packages
         run: |
           dotnet nuget push out/*.nupkg \
             --source "https://nuget.pkg.github.com/rasalshukla/index.json" \
