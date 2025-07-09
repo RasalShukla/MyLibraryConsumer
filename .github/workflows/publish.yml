@@ -22,11 +22,6 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Create empty nuget.config
-        run: |
-          echo '<?xml version="1.0" encoding="utf-8"?>' > empty-nuget.config
-          echo '<configuration><packageSources></packageSources></configuration>' >> empty-nuget.config
-
       - name: Restore dependencies
         run: dotnet restore
         working-directory: MyLibrary
@@ -48,5 +43,4 @@ jobs:
           dotnet nuget push MyLibrary/out/*.nupkg \
             --source "https://nuget.pkg.github.com/RasalShukla/index.json" \
             --api-key "${{ secrets.GITHUB_TOKEN }}" \
-            --configfile ./empty-nuget.config \
             --skip-duplicate
