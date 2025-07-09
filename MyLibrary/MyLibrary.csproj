@@ -5,7 +5,7 @@
     <Version>2.0.0</Version>
     <Authors>rasalshukla</Authors>
     <PackageId>MyLibrary</PackageId>
-    <Description>A test library</Description>
+    <Description>A test library Rasal</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/rasalshukla/MyLibraryConsumer</RepositoryUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
