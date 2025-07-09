@@ -22,6 +22,11 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Create empty nuget.config
+        run: |
+          echo '<?xml version="1.0" encoding="utf-8"?>' > empty-nuget.config
+          echo '<configuration><packageSources></packageSources></configuration>' >> empty-nuget.config
+
       - name: Restore dependencies
         run: dotnet restore
         working-directory: MyLibrary
@@ -30,17 +35,18 @@ jobs:
         run: dotnet build -c Release
         working-directory: MyLibrary
 
-      - name: Pack NuGet package Rasal
+      - name: Pack NuGet package
         run: dotnet pack -c Release --no-build -o out
         working-directory: MyLibrary
 
       - name: Push NuGet package to GitHub Packages
         run: |
-          echo "📦 Listing .nupkg files:"
+          echo "Listing .nupkg files in 'out' folder:"
           ls -lh MyLibrary/out
 
-          echo "🚀 Pushing to GitHub Packages..."
+          echo "Pushing to GitHub Packages..."
           dotnet nuget push MyLibrary/out/*.nupkg \
-            --source "https://nuget.pkg.github.com/rasalshukla/index.json" \
-            --api-key "${{ secrets.NUGET_TOKEN }}" \
+            --source "https://nuget.pkg.github.com/RasalShukla/index.json" \
+            --api-key "${{ secrets.GITHUB_TOKEN }}" \
+            --configfile ./empty-nuget.config \
             --skip-duplicate
