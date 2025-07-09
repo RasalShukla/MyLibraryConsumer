@@ -46,7 +46,7 @@ jobs:
 
           echo "Pushing to GitHub Packages..."
           dotnet nuget push MyLibrary/out/*.nupkg \
-            --source "https://nuget.pkg.github.com/Inter-IKEA-Digital/index.json" \
+            --source "https://nuget.pkg.github.com/RasalShukla/index.json" \
             --api-key "${{ secrets.GITHUB_TOKEN }}" \
             --configfile ./empty-nuget.config \
             --skip-duplicate
