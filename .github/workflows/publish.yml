@@ -40,7 +40,7 @@ jobs:
           ls -lh out
           echo "🚀 Publishing to GitHub Packages..."
           dotnet nuget push out/*.nupkg \
-            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+            --source "https://nuget.pkg.github.com/RasalShukla/index.json" \
             --api-key "${{ secrets.GITHUB_TOKEN }}" \
             --skip-duplicate
         working-directory: MyLibrary
