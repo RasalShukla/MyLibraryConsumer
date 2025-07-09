@@ -2,8 +2,7 @@ name: Publish NuGet Package
 
 on:
   push:
-    tags:
-      - 'v*'
+    tags: ['v*']
 
 jobs:
   publish:
@@ -18,22 +17,31 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore
-        working-directory: MyLibrary
+      - name: Debug: List repository root
+        run: ls -R .
 
-      - name: Build project
-        run: dotnet build -c Release
-        working-directory: MyLibrary
+      - name: Restore & Build
+        run: |
+          cd MyLibrary
+          dotnet restore
+          dotnet build -c Release
+
+      - name: Debug: List build output
+        run: |
+          cd MyLibrary
+          ls -R bin
 
       - name: Pack NuGet package
-        run: dotnet pack -c Release -o out
-        working-directory: MyLibrary
+        run: |
+          cd MyLibrary
+          dotnet pack -c Release -o ../out
 
-      - name: Push NuGet package to GitHub Packages
+      - name: Debug: List packaged files
+        run: ls -R out
+
+      - name: Push NuGet package
         run: |
           dotnet nuget push out/*.nupkg \
             --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
             --api-key "${{ secrets.GITHUB_TOKEN }}" \
             --skip-duplicate
-        working-directory: MyLibrary
