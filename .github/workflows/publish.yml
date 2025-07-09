@@ -17,9 +17,15 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-          source-url: https://nuget.pkg.github.com/rasalshukla/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add GitHub NuGet source
+        run: |
+          dotnet nuget add source \
+            --username rasalshukla \
+            --password ${{ secrets.GITHUB_TOKEN }} \
+            --store-password-in-clear-text \
+            --name github \
+            https://nuget.pkg.github.com/rasalshukla/index.json
 
       - name: Restore dependencies
         run: dotnet restore
@@ -33,8 +39,6 @@ jobs:
         run: dotnet pack -c Release --no-build -o out
         working-directory: MyLibrary
 
-      - name: Publish to GitHub Packages
-        run: dotnet nuget push out/*.nupkg --source "github" --skip-duplicate
+      - name: Push package to GitHub Packages
+        run: dotnet nuget push out/*.nupkg --source github --skip-duplicate
         working-directory: MyLibrary
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
